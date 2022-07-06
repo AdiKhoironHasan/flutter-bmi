@@ -26,9 +26,18 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff0a0e21),
+      backgroundColor: primaryColor,
       appBar: AppBar(
-        title: const Text("BMI Calculator"),
+        title: const Center(
+          child: Text(
+            "BMI Calculator",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 26,
+              // fontFamily: "Nunito",
+            ),
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -42,12 +51,14 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       setState(() {});
                     },
                     child: BmiCard(
-                      borderColor:
-                          (gender == "male") ? Colors.white : primaryColor,
+                      borderColor: (gender == "male")
+                          ? const Color(0xffFFFFFF)
+                          : const Color(0xff92B4EC),
                       child: const GenderIconText(
-                        icon: Icons.male,
-                        title: "Male",
+                        icon: Icons.man,
+                        title: "B o y",
                       ),
+                      bgColor: const Color(0xff92B4EC),
                     ),
                   ),
                 ),
@@ -58,12 +69,14 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       setState(() {});
                     },
                     child: BmiCard(
-                      borderColor:
-                          (gender == "female" ? Colors.white : primaryColor),
+                      borderColor: (gender == "female"
+                          ? const Color(0xffFFFFFF)
+                          : const Color(0xffC1A7F7)),
                       child: const GenderIconText(
-                        icon: Icons.female,
-                        title: 'Female',
+                        icon: Icons.woman,
+                        title: 'G i r l',
                       ),
+                      bgColor: const Color(0xffC1A7F7),
                     ),
                   ),
                 )
@@ -72,58 +85,63 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
           ),
           Expanded(
             child: BmiCard(
+                bgColor: const Color(0xffff9282),
+                borderColor: const Color(0xffff9282),
                 child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "HEIGHT",
-                  style: labelTextStyle!.copyWith(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "$height",
-                      style: numberTextStyle,
+                      "H e i g h t",
+                      style: labelTextStyle!.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(
-                      width: 5,
+                      height: 5,
                     ),
-                    Text(
-                      "cm",
-                      style: labelTextStyle,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "$height",
+                          style: numberTextStyle,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "cm",
+                          style: labelTextStyle,
+                        ),
+                      ],
                     ),
+                    Slider(
+                      value: height.toDouble(),
+                      min: 80,
+                      max: 250,
+                      activeColor: const Color(0xff97C4B8),
+                      thumbColor: const Color(0xff66BFBF),
+                      inactiveColor: const Color(0xffCCF3EE),
+                      onChanged: (value) {
+                        height = value.toInt();
+                        setState(() {});
+                      },
+                    )
                   ],
-                ),
-                Slider(
-                  value: height.toDouble(),
-                  min: 80,
-                  max: 250,
-                  activeColor: Colors.white,
-                  thumbColor: Colors.red,
-                  onChanged: (value) {
-                    height = value.toInt();
-                    setState(() {});
-                  },
-                )
-              ],
-            )),
+                )),
           ),
           Expanded(
             child: Row(children: [
               Expanded(
                 child: BmiCard(
+                  bgColor: const Color(0xffB6D986),
+                  borderColor: const Color(0xffB6D986),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "WEIGHT",
+                        "W e i g h t",
                         style: labelTextStyle,
                       ),
                       Text(
@@ -144,7 +162,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                             },
                             elevation: 0,
                             shape: const CircleBorder(),
-                            fillColor: Colors.grey,
+                            fillColor: buttonColor,
                             constraints: const BoxConstraints.tightFor(
                               width: 50,
                               height: 50,
@@ -159,12 +177,14 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           ),
                           RawMaterialButton(
                             onPressed: () {
-                              weight--;
+                              if (weight > 1) {
+                                weight--;
+                              }
                               setState(() {});
                             },
                             elevation: 0,
                             shape: const CircleBorder(),
-                            fillColor: Colors.grey,
+                            fillColor: buttonColor,
                             constraints: const BoxConstraints.tightFor(
                               width: 50,
                               height: 50,
@@ -182,11 +202,13 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
               ),
               Expanded(
                 child: BmiCard(
+                  bgColor: const Color(0xff9FD3CB),
+                  borderColor: const Color(0xff9FD3CB),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "AGE",
+                        "A g e",
                         style: labelTextStyle,
                       ),
                       Text(
@@ -206,7 +228,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                             },
                             elevation: 0,
                             shape: const CircleBorder(),
-                            fillColor: Colors.grey,
+                            fillColor: buttonColor,
                             constraints: const BoxConstraints.tightFor(
                               width: 50,
                               height: 50,
@@ -221,12 +243,14 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           ),
                           RawMaterialButton(
                             onPressed: () {
-                              age--;
+                              if (age > 1) {
+                                age--;
+                              }
                               setState(() {});
                             },
                             elevation: 0,
                             shape: const CircleBorder(),
-                            fillColor: Colors.grey,
+                            fillColor: buttonColor,
                             constraints: const BoxConstraints.tightFor(
                               width: 50,
                               height: 50,
@@ -261,11 +285,11 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
               margin: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: const Color(0xffec3c66),
+                color: const Color(0xffF25287),
               ),
               child: Center(
                   child: Text(
-                "Calculate BMI",
+                "Calculate",
                 style: labelTextStyle!.copyWith(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -284,18 +308,21 @@ class BmiCard extends StatelessWidget {
     Key? key,
     this.child,
     this.borderColor = primaryColor,
+    this.bgColor = const Color(0xffC1A7F7),
   }) : super(key: key);
 
   final Widget? child;
   final Color? borderColor;
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xff1d1e33),
+        color: bgColor,
+        // const Color(0xff1d1e33),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: borderColor!), //tidak null
+        border: Border.all(color: borderColor!, width: 5), //tidak null
       ),
       margin: const EdgeInsets.all(15),
       child: child,

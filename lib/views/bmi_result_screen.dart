@@ -67,7 +67,16 @@ class BmiResultScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("BMI Calculator"),
+        title: const Center(
+          child: Text(
+            "BMI Calculator",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 26,
+              // fontFamily: "Nunito",
+            ),
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -115,6 +124,7 @@ class BmiResultScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 15,
+                            fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
@@ -132,11 +142,11 @@ class BmiResultScreen extends StatelessWidget {
               margin: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: const Color(0xffec3c66),
+                color: const Color(0xffF25287),
               ),
               child: const Center(
                   child: Text(
-                "Re-Calculate BMI",
+                "Re-Calculate",
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
